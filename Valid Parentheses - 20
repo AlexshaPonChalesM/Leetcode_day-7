@@ -1,0 +1,24 @@
+bool isValid(char* s) {
+    int max=100001;
+    char stack[max]; 
+    int top = -1; 
+    for (int i = 0; s[i] != '\0'; i++) {
+        char c = s[i];
+        if (c == '(' || c == '{' || c == '[') {
+            if (top < max - 1) { 
+                stack[++top] = c; 
+            } else {
+                return false;  
+            }
+        }
+        else if (c == ')' || c == '}' || c == ']') {
+            if (top == -1) return false;
+            char top1 = stack[top--];  
+            if ((c == ')' && top1 != '(') || (c == '}' && top1 != '{') || (c == ']' && top1 !='['))
+            {
+                return false;  
+            }
+        }
+    }
+    return top == -1;
+}
